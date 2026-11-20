@@ -20,8 +20,8 @@
   --radius: 2px;
 
   /* Hero image object position variables */
-  --hero-pos-desktop: 50% 56%;
-  --hero-pos-mobile: 50% 50%;
+  --hero-pos-desktop: 50% 49%;
+  --hero-pos-mobile: 80% 50%;
   --hero-pos: var(--hero-pos-desktop);
 }
 
@@ -29,6 +29,39 @@
   :root {
     --hero-pos: var(--hero-pos-mobile);
   }
+}
+
+/* Portrait backdrop light and torso mask (Revision 12) */
+.portrait-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.portrait-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: -8% -25% 0 -25%;
+  background: radial-gradient(60% 55% at 50% 40%, rgba(174, 184, 184, 0.12), rgba(93, 187, 99, 0.04) 45%, transparent 72%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.portrait-img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: 50% 100%;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 58%, transparent 82%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 58%, transparent 82%);
 }
 
 html {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import { projects } from '../data/projects';
-import { photos } from '../data/photos';
+import { heroImage, portraitImage, photos } from '../data/photos';
 import EditableField from '../components/EditableField';
 import FieldPhoto from '../components/FieldPhoto';
 import Lightbox from '../components/Lightbox';
@@ -39,21 +39,19 @@ export default function Home() {
         {/* Photo band: full-width, desktop 55svh (min 320px), mobile 60svh */}
         <div className="relative w-full h-[60svh] md:h-[55svh] min-h-[320px] overflow-hidden bg-surface">
           {!heroImgFailed ? (
-            <picture className="w-full h-full block">
-              <source media="(min-width: 768px)" srcSet="/images/hero-2400.webp" />
-              <img
-                src="/images/hero-1200.webp"
-                alt=""
-                fetchPriority="high"
-                loading="eager"
-                decoding="async"
-                onError={() => setHeroImgFailed(true)}
-                className="w-full h-full object-cover"
-                style={{
-                  objectPosition: 'var(--hero-pos, var(--hero-pos-desktop))',
-                }}
-              />
-            </picture>
+            <img
+              src={heroImage.src}
+              width={heroImage.width}
+              height={heroImage.height}
+              alt=""
+              fetchPriority="high"
+              decoding="async"
+              onError={() => setHeroImgFailed(true)}
+              className="w-full h-full object-cover"
+              style={{
+                objectPosition: 'var(--hero-pos, var(--hero-pos-desktop))',
+              }}
+            />
           ) : (
             <div className="w-full h-full bg-surface flex items-center justify-center">
               <span className="font-mono text-xs text-muted/60 uppercase tracking-widest">
@@ -200,34 +198,33 @@ export default function Home() {
               </a>
             </div>
 
-            {/* Columns 4 to 7: The Portrait (sticky top-24, aspect 4:5, radius 2px, 1px border, data-cursor="target") */}
-            <div className="md:col-span-4 flex justify-center md:justify-start">
-              <div className="w-full max-w-[380px] md:sticky md:top-24">
+            {/* Columns 4 to 7: The Portrait (sticky top-24, aspect 4:5, data-cursor="target") */}
+            <div className="md:col-span-4 flex justify-center md:justify-start self-start">
+              <div className="w-full max-w-[420px] md:max-w-[380px] md:sticky md:top-24">
                 <figure className="w-full">
                   <div
                     data-cursor="target"
-                    className="relative w-full aspect-[4/5] overflow-hidden rounded-[2px] border border-line bg-surface focus-within:ring-1 focus-within:ring-accent"
+                    className="portrait-wrapper focus-within:ring-1 focus-within:ring-accent"
                   >
                     {!portraitImgFailed ? (
                       <img
-                        src="/images/portrait.webp"
+                        src={portraitImage.src}
                         alt="Guruvesh Bachhav portrait"
-                        width={1086}
-                        height={1448}
-                        loading="lazy"
-                        decoding="async"
+                        width={portraitImage.width}
+                        height={portraitImage.height}
+                        decoding="sync"
                         onError={() => setPortraitImgFailed(true)}
-                        className="w-full h-full object-cover rounded-[2px]"
+                        className="portrait-img"
                       />
                     ) : (
-                      <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-surface text-center">
+                      <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center">
                         <span className="font-mono text-xs text-muted/70 tracking-widest uppercase">
                           portrait
                         </span>
                       </div>
                     )}
                   </div>
-                  <figcaption className="mt-2.5 font-mono text-xs text-muted">
+                  <figcaption className="mt-3 font-mono text-xs text-muted text-center md:text-left">
                     <EditableField value="[EDIT: caption]" />
                   </figcaption>
                 </figure>

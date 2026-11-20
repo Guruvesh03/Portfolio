@@ -9,6 +9,7 @@ export default function FieldPhoto({
   showCaption = true,
 }) {
   const [hasError, setHasError] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const aspectRatio = photo.width && photo.height ? `${photo.width} / ${photo.height}` : '4 / 3';
 
   return (
@@ -16,7 +17,12 @@ export default function FieldPhoto({
       <div
         data-cursor="view"
         className="relative w-full overflow-hidden bg-surface border border-line cursor-pointer focus-within:ring-1 focus-within:ring-accent"
-        style={{ aspectRatio }}
+        style={{
+          aspectRatio,
+          backgroundImage: photo.blur ? `url("${photo.blur}")` : undefined,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
         onClick={onClick}
         onKeyDown={(e) => {
           if (e.key === 'Enter' || e.key === ' ') {
@@ -30,14 +36,19 @@ export default function FieldPhoto({
       >
         {!hasError ? (
           <img
-            src={photo.thumb || photo.src}
+            src={photo.grid || photo.src}
+            srcSet={`${photo.grid || photo.src} 2000w, ${photo.src} ${photo.width}w`}
+            sizes="(min-width: 1024px) 33vw, 100vw"
             alt={photo.alt.startsWith('[EDIT') ? 'Field observation photograph' : photo.alt}
             width={photo.width}
             height={photo.height}
             loading={priority ? 'eager' : 'lazy'}
             decoding="async"
+            onLoad={() => setIsLoaded(true)}
             onError={() => setHasError(true)}
-            className="w-full h-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-[1.02] will-change-transform"
+            className={`w-full h-full object-cover transition-opacity duration-300 motion-reduce:transition-none ${
+              isLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
           />
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center p-4 bg-surface text-center">
@@ -52,12 +63,18 @@ export default function FieldPhoto({
       </div>
 
       {showCaption && (
-        <figcaption className="mt-2.5 flex items-baseline justify-between gap-3 font-mono text-xs text-muted transition-colors duration-300 group-hover:text-text">
+        <figcaption className="mt-2.5 flex items-baseline justify-between gap-3 font-mono text-xs text-muted transition-[color,filter] duration-300 group-hover:brightness-125 group-hover:text-text">
           <div className="flex-1 truncate">
-            <EditableField value={photo.caption} className="text-muted group-hover:text-text transition-colors duration-300" />
+            <EditableField
+              value={photo.caption}
+              className="text-muted group-hover:text-text transition-colors duration-300"
+            />
           </div>
           <div className="flex-shrink-0">
-            <EditableField value={photo.year} className="text-muted/70 group-hover:text-muted transition-colors duration-300" />
+            <EditableField
+              value={photo.year}
+              className="text-muted/70 group-hover:text-muted transition-colors duration-300"
+            />
           </div>
         </figcaption>
       )}

@@ -130,7 +130,7 @@ export default function Home() {
               {/* Left side: two-line intro in Hanken Grotesk max-w-[34rem], then mono status line with accent dot */}
               <div className="max-w-[34rem] space-y-3">
                 <p className="font-sans text-base md:text-lg text-text/90 font-light leading-relaxed">
-                  Software developer. I build APIs, web apps and ML-backed tools, and photograph animals on my phone.
+                  Software developer building web applications, APIs and data-driven tools.
                 </p>
                 <div className="flex items-center gap-2 font-mono text-xs md:text-sm text-muted flex-wrap">
                   <span className="w-2 h-2 rounded-full bg-accent inline-block flex-shrink-0" aria-hidden="true" />
@@ -224,9 +224,11 @@ export default function Home() {
                       </div>
                     )}
                   </div>
-                  <figcaption className="mt-3 font-mono text-xs text-muted text-center md:text-left">
-                    <EditableField value="[EDIT: caption]" />
-                  </figcaption>
+                  {portraitImage.caption && (
+                    <figcaption className="mt-3 font-mono text-xs text-muted text-center md:text-left">
+                      {portraitImage.caption}
+                    </figcaption>
+                  )}
                 </figure>
               </div>
             </div>
@@ -245,7 +247,7 @@ export default function Home() {
               </h3>
 
               <p className="font-sans text-base md:text-lg text-text/90 leading-relaxed font-light">
-                I'm a final-year Computer Engineering student from Nashik. I did a Data Science and AI/ML internship at SupraTech and now focus on Python backend development. I like building things that explain their own decisions. Outside code, I photograph animals and daily scenes on my phone.
+                I'm a final-year Computer Engineering student from Nashik, graduating in 2027. I interned in Data Science and AI/ML at SupraTech, and I build web applications, APIs and machine-learning tools. My projects range from an explainable early-warning system for student mental health to a tamper-evident platform for legal case records. Outside code, I photograph animals and daily scenes on my phone.
               </p>
 
               {/* Three mono lines: Building, Learning, Practicing */}
@@ -255,7 +257,7 @@ export default function Home() {
                     Building:
                   </span>
                   <span className="text-text">
-                    Sentimate, my final-year project (FastAPI, XGBoost, React)
+                    Sentimate, my final-year project (explainable ML, React)
                   </span>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
@@ -263,7 +265,7 @@ export default function Home() {
                     Learning:
                   </span>
                   <span className="text-text">
-                    Python backend depth, PostgreSQL, system design basics
+                    Backend development, PostgreSQL, system design basics
                   </span>
                 </div>
                 <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
@@ -271,7 +273,7 @@ export default function Home() {
                     Practicing:
                   </span>
                   <span className="text-text">
-                    data structures and algorithms
+                    Data structures and algorithms
                   </span>
                 </div>
               </div>
@@ -536,7 +538,7 @@ export default function Home() {
               <span className="font-mono text-xs text-muted uppercase tracking-wider min-w-[160px]">
                 Backend and data:
               </span>
-              <span className="text-text">FastAPI, PostgreSQL, Supabase, MongoDB, SQL</span>
+              <span className="text-text">PostgreSQL, Supabase, MongoDB, SQL</span>
             </div>
             <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4">
               <span className="font-mono text-xs text-muted uppercase tracking-wider min-w-[160px]">
@@ -699,7 +701,7 @@ export default function Home() {
             </div>
 
             <p className="font-mono text-xs text-accent pt-4">
-              Open to software developer roles for 2027.
+              Open to software developer roles, graduating 2027.
             </p>
           </div>
         </div>

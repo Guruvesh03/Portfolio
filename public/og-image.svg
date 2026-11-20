@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#0A0D0C"/>
+  <rect x="40" y="40" width="1120" height="550" fill="none" stroke="#E9ECE8" stroke-opacity="0.10" stroke-width="1"/>
+  <text x="100" y="140" font-family="monospace" font-size="16" fill="#8A948E" letter-spacing="3">01 // GURUVESH BACHHAV</text>
+  <text x="100" y="280" font-family="serif" font-size="80" fill="#E9ECE8" font-weight="normal">Guruvesh Bachhav</text>
+  <text x="100" y="360" font-family="sans-serif" font-size="28" fill="#E9ECE8" opacity="0.9">Software developer · Nashik, India</text>
+  <circle cx="106" cy="440" r="6" fill="#5DBB63"/>
+  <text x="126" y="445" font-family="monospace" font-size="18" fill="#8A948E">Open to software developer roles (Graduating 2027)</text>
+</svg>

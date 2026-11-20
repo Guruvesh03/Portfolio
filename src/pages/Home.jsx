@@ -434,14 +434,6 @@ export default function Home() {
                           <EditableField as="p" value={item.problem} className="text-text/90" />
                         </div>
 
-                        {/* What I built */}
-                        <div>
-                          <h4 className="font-mono text-xs text-muted uppercase tracking-wider block mb-1">
-                            What I built
-                          </h4>
-                          <EditableField as="p" value={item.built} className="text-text/90" />
-                        </div>
-
                         {/* The hard part */}
                         <div>
                           <h4 className="font-mono text-xs text-muted uppercase tracking-wider block mb-1">

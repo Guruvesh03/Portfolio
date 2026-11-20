@@ -46,8 +46,8 @@
 .portrait-wrapper::before {
   content: "";
   position: absolute;
-  inset: -8% -25% 0 -25%;
-  background: radial-gradient(60% 55% at 50% 40%, rgba(174, 184, 184, 0.12), rgba(93, 187, 99, 0.04) 45%, transparent 72%);
+  inset: -6% -20% 0 -20%;
+  background: radial-gradient(60% 55% at 50% 36%, rgba(174, 184, 184, 0.14), rgba(93, 187, 99, 0.05) 45%, transparent 72%);
   z-index: 0;
   pointer-events: none;
 }
@@ -60,8 +60,8 @@
   height: auto;
   object-fit: contain;
   object-position: 50% 100%;
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 58%, transparent 82%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 58%, transparent 82%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 76%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 52%, transparent 76%);
 }
 
 html {

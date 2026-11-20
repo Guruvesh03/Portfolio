@@ -8,12 +8,12 @@ export const heroImage = {
 };
 
 export const portraitImage = {
-  "src": "/images/portrait.77edaf.png",
+  "src": "/images/portrait.fcede0.png",
   "width": 1600,
   "height": 2000,
-  "sizeKb": "2763.9",
+  "sizeKb": "2588.3",
   "originalFile": "portrait-cutout.png",
-  "generatedFileName": "portrait.77edaf.png"
+  "generatedFileName": "portrait.fcede0.png"
 };
 
 export const photos = [

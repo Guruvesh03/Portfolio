@@ -200,7 +200,7 @@ export default function Home() {
 
             {/* Columns 4 to 7: The Portrait (sticky top-24, aspect 4:5, data-cursor="target") */}
             <div className="md:col-span-4 flex justify-center md:justify-start self-start">
-              <div className="w-full max-w-[420px] md:max-w-[380px] md:sticky md:top-24">
+              <div className="w-full max-w-[340px] lg:max-w-[360px] md:sticky md:top-24">
                 <figure className="w-full">
                   <div
                     data-cursor="target"

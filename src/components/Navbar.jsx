@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { motion, LayoutGroup, useReducedMotion } from 'framer-motion';
 
 export default function Navbar() {
   const location = useLocation();
@@ -24,19 +24,37 @@ export default function Navbar() {
         { label: 'Contact', href: '#contact', id: 'contact', isRouter: false },
       ];
 
-  // IntersectionObserver for tracking active sections on "/"
+  // IntersectionObserver & Scroll for tracking active sections on "/"
   useEffect(() => {
     if (isPhotography) {
       setActiveSection('photography');
       return;
     }
 
+    const handleScroll = () => {
+      // In hero, no active link; lens hides
+      if (window.scrollY < 100) {
+        setActiveSection(null);
+        return;
+      }
+
+      // If at bottom of page, activate contact
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 60) {
+        setActiveSection('contact');
+        lastActiveRef.current = 'contact';
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     const sectionIds = ['hero', 'about', 'work', 'stack', 'field-notes', 'contact'];
     const elements = sectionIds
       .map((id) => document.getElementById(id))
       .filter(Boolean);
 
-    if (elements.length === 0) return;
+    if (elements.length === 0) {
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -44,7 +62,6 @@ export default function Navbar() {
           if (entry.isIntersecting) {
             const id = entry.target.id;
             if (id === 'hero') {
-              // In hero, no active link; lens fades out
               setActiveSection(null);
             } else if (id === 'about') {
               setActiveSection('about');
@@ -66,13 +83,16 @@ export default function Navbar() {
         });
       },
       {
-        rootMargin: '-40% 0px -55% 0px',
+        rootMargin: '-25% 0px -40% 0px',
         threshold: 0,
       }
     );
 
     elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      observer.disconnect();
+    };
   }, [isPhotography]);
 
   // Click handler: immediate active state & smooth scroll
@@ -107,36 +127,33 @@ export default function Navbar() {
         Skip to main content
       </a>
 
-      {/* Pill Nav Container: Fixed top-center on desktop, fixed bottom-center on mobile */}
+      {/* Pill Nav Container: Fixed top-right on all screen sizes */}
       <nav
         aria-label="Primary"
-        className="nav-pill-container z-50 flex items-center font-sans select-none whitespace-nowrap fixed left-1/2 -translate-x-1/2 h-[44px] p-[4px] bottom-[calc(12px+env(safe-area-inset-bottom))] md:bottom-auto md:top-[calc(16px+env(safe-area-inset-top))] text-[13px] md:text-[14px]"
+        className="nav-pill-container flex items-center font-sans select-none whitespace-nowrap"
       >
-        {navLinks.map((link) => {
-          const isActive = activeSection === link.id;
-          const Tag = link.isRouter ? Link : 'a';
+        <LayoutGroup id="nav-pill">
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id;
+            const Tag = link.isRouter ? Link : 'a';
 
-          return (
-            <Tag
-              key={link.id}
-              to={link.isRouter ? link.href : undefined}
-              href={!link.isRouter ? link.href : undefined}
-              data-cursor="target"
-              onClick={(e) => handleLinkClick(e, link)}
-              aria-current={isActive ? 'location' : undefined}
-              className={`relative h-full flex items-center justify-center px-[12px] md:px-[18px] rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
-                isActive ? 'text-text' : 'text-muted hover:text-text'
-              }`}
-            >
-              {/* Active Lens Indicator with spring layoutId */}
-              <AnimatePresence>
+            return (
+              <Tag
+                key={link.id}
+                to={link.isRouter ? link.href : undefined}
+                href={!link.isRouter ? link.href : undefined}
+                data-cursor="target"
+                onClick={(e) => handleLinkClick(e, link)}
+                aria-current={isActive ? 'location' : undefined}
+                className={`relative h-full flex items-center justify-center rounded-full transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent whitespace-nowrap text-[12.5px] min-[400px]:text-[13px] md:text-[14px] px-[9px] min-[400px]:px-[12px] md:px-[18px] ${
+                  isActive ? 'text-text' : 'text-muted hover:text-text'
+                }`}
+              >
+                {/* Active Lens Indicator with spring layoutId */}
                 {isActive && (
                   <motion.div
                     layoutId="nav-lens"
                     className="nav-lens absolute inset-0 z-0 pointer-events-none"
-                    initial={reducedMotion ? false : { opacity: 0, scale: 0.92 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={reducedMotion ? false : { opacity: 0, scale: 0.92 }}
                     transition={
                       reducedMotion
                         ? { duration: 0 }
@@ -144,13 +161,13 @@ export default function Navbar() {
                     }
                   />
                 )}
-              </AnimatePresence>
 
-              {/* Link Label */}
-              <span className="relative z-10 leading-none">{link.label}</span>
-            </Tag>
-          );
-        })}
+                {/* Link Label */}
+                <span className="relative z-10 leading-none">{link.label}</span>
+              </Tag>
+            );
+          })}
+        </LayoutGroup>
       </nav>
     </>
   );

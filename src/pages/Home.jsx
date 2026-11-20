@@ -29,7 +29,7 @@ export default function Home() {
       };
 
   return (
-    <main id="main-content" className="w-full pb-[88px] md:pb-0">
+    <main id="main-content" className="w-full">
       {/* 1. HERO (photo band on top, then a solid dark block in --bg) */}
       <section
         id="hero"

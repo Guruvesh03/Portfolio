@@ -19,7 +19,7 @@ export default function Photography() {
       };
 
   return (
-    <main id="main-content" className="w-full min-h-screen bg-bg text-text pb-[88px] md:pb-32">
+    <main id="main-content" className="w-full min-h-screen bg-bg text-text pb-24 md:pb-32">
       <motion.section
         id="field-notes-archive"
         aria-label="Field notes archive"

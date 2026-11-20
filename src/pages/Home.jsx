@@ -322,10 +322,12 @@ export default function Home() {
                                 aria-hidden="true"
                               />
                             </div>
-                            <EditableField
-                              value={item.status}
-                              className="text-[11px] uppercase tracking-wider font-mono text-muted border border-line px-2 py-0.5"
-                            />
+                            {item.status && (
+                              <EditableField
+                                value={item.status}
+                                className="text-[11px] uppercase tracking-wider font-mono text-muted border border-line px-2 py-0.5"
+                              />
+                            )}
                             <div className="hidden sm:flex items-center gap-2 font-mono text-xs text-muted/70">
                               {item.stack.map((st) => (
                                 <span key={st}>{st}</span>
@@ -337,20 +339,22 @@ export default function Home() {
                           </p>
                         </div>
 
-                        <div className="flex items-center gap-4 font-mono text-xs self-start md:self-center shrink-0">
-                          {item.links.map((link) => (
-                            <a
-                              key={link.label}
-                              href={link.href}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="min-h-[44px] inline-flex items-center text-text hover:text-accent border-b border-accent pb-0.5 transition-colors focus-visible:outline-none"
-                            >
-                              <span>{link.label}</span>
-                              <span aria-hidden="true">&rarr;</span>
-                            </a>
-                          ))}
-                        </div>
+                        {item.links && item.links.length > 0 && (
+                          <div className="flex items-center gap-4 font-mono text-xs self-start md:self-center shrink-0">
+                            {item.links.map((link) => (
+                              <a
+                                key={link.label}
+                                href={link.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="min-h-[44px] inline-flex items-center text-text hover:text-accent border-b border-accent pb-0.5 transition-colors focus-visible:outline-none"
+                              >
+                                <span>{link.label}</span>
+                                <span aria-hidden="true">&rarr;</span>
+                              </a>
+                            ))}
+                          </div>
+                        )}
                       </div>
 
                       {/* Optional Note Field */}
@@ -389,10 +393,12 @@ export default function Home() {
                               aria-hidden="true"
                             />
                           </div>
-                          <EditableField
-                            value={item.status}
-                            className="text-[11px] uppercase tracking-wider font-mono text-muted border border-line px-2 py-0.5"
-                          />
+                          {item.status && (
+                            <EditableField
+                              value={item.status}
+                              className="text-[11px] uppercase tracking-wider font-mono text-muted border border-line px-2 py-0.5"
+                            />
+                          )}
                         </div>
                         <p className="font-sans text-sm md:text-base text-muted leading-relaxed">
                           {item.description}
@@ -460,35 +466,37 @@ export default function Home() {
                         </div>
 
                         {/* Links */}
-                        <div>
-                          <h4 className="font-mono text-xs text-muted uppercase tracking-wider block mb-2">
-                            Links
-                          </h4>
-                          <div className="flex flex-wrap items-center gap-4">
-                            {item.links.map((link) => {
-                              const isEditableLink = link.href.startsWith('[EDIT');
-                              return isEditableLink ? (
-                                <span
-                                  key={link.label}
-                                  className="inline-flex items-center gap-1 font-mono text-xs px-2 py-0.5 border border-dashed border-silver text-silver bg-white/[0.06] rounded-sm"
-                                >
-                                  <span>{link.label}:</span>
-                                  <span>{link.href}</span>
-                                </span>
-                              ) : (
-                                <a
-                                  key={link.label}
-                                  href={link.href}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="min-h-[44px] inline-flex items-center font-mono text-xs text-text hover:text-accent border-b border-accent pb-0.5 transition-colors focus-visible:outline-none"
-                                >
-                                  {link.label} &rarr;
-                                </a>
-                              );
-                            })}
+                        {item.links && item.links.length > 0 && (
+                          <div>
+                            <h4 className="font-mono text-xs text-muted uppercase tracking-wider block mb-2">
+                              Links
+                            </h4>
+                            <div className="flex flex-wrap items-center gap-4">
+                              {item.links.map((link) => {
+                                const isEditableLink = link.href.startsWith('[EDIT');
+                                return isEditableLink ? (
+                                  <span
+                                    key={link.label}
+                                    className="inline-flex items-center gap-1 font-mono text-xs px-2 py-0.5 border border-dashed border-silver text-silver bg-white/[0.06] rounded-sm"
+                                  >
+                                    <span>{link.label}:</span>
+                                    <span>{link.href}</span>
+                                  </span>
+                                ) : (
+                                  <a
+                                    key={link.label}
+                                    href={link.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="min-h-[44px] inline-flex items-center font-mono text-xs text-text hover:text-accent border-b border-accent pb-0.5 transition-colors focus-visible:outline-none"
+                                  >
+                                    {link.label} &rarr;
+                                  </a>
+                                );
+                              })}
+                            </div>
                           </div>
-                        </div>
+                        )}
                       </div>
                     )}
                   </article>

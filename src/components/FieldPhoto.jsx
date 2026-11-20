@@ -63,19 +63,26 @@ export default function FieldPhoto({
       </div>
 
       {showCaption && (
-        <figcaption className="mt-2.5 flex items-baseline justify-between gap-3 font-mono text-xs text-muted transition-[color,filter] duration-300 group-hover:brightness-125 group-hover:text-text">
-          <div className="flex-1 truncate">
-            <EditableField
-              value={photo.caption}
-              className="text-muted group-hover:text-text transition-colors duration-300"
-            />
+        <figcaption className="mt-2.5 flex flex-col gap-1 font-mono text-xs text-muted transition-[color,filter] duration-300 group-hover:brightness-125 group-hover:text-text">
+          <div className="flex items-baseline justify-between gap-3">
+            <div className="flex-1 truncate">
+              <EditableField
+                value={photo.caption}
+                className="text-muted group-hover:text-text transition-colors duration-300"
+              />
+            </div>
+            <div className="flex-shrink-0">
+              <EditableField
+                value={photo.year}
+                className="text-muted/70 group-hover:text-muted transition-colors duration-300"
+              />
+            </div>
           </div>
-          <div className="flex-shrink-0">
-            <EditableField
-              value={photo.year}
-              className="text-muted/70 group-hover:text-muted transition-colors duration-300"
-            />
-          </div>
+          {photo.alt && !photo.alt.startsWith('[EDIT') && (
+            <p className="font-sans text-[11px] leading-relaxed text-muted/80 line-clamp-2">
+              {photo.alt}
+            </p>
+          )}
         </figcaption>
       )}
     </figure>

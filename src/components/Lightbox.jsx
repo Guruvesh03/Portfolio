@@ -146,14 +146,22 @@ export default function Lightbox({
             </button>
           </div>
 
-          {/* Bottom Bar: Caption & Year */}
-          <div className="max-w-5xl w-full mx-auto pt-4 border-t border-line flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 font-mono text-xs">
-            <div className="text-text">
-              <EditableField value={currentPhoto.caption} />
+          {/* Bottom Bar: Caption, Year & Visual Description */}
+          <div className="max-w-5xl w-full mx-auto pt-4 border-t border-line flex flex-col gap-1.5 font-mono text-xs">
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+              <div className="text-text text-sm">
+                <EditableField value={currentPhoto.caption} />
+              </div>
+              <div className="text-muted">
+                <EditableField value={currentPhoto.year} />
+              </div>
             </div>
-            <div className="text-muted">
-              <EditableField value={currentPhoto.year} />
-            </div>
+            {currentPhoto.alt && !currentPhoto.alt.startsWith('[EDIT') && (
+              <p className="font-sans text-xs text-muted/90 leading-relaxed max-w-3xl">
+                <span className="font-mono text-[10px] uppercase tracking-wider text-muted/60 mr-2">Visual record:</span>
+                {currentPhoto.alt}
+              </p>
+            )}
           </div>
         </motion.div>
       )}

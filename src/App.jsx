@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import CustomCursor from './components/CustomCursor';
 import Home from './pages/Home';
 import Photography from './pages/Photography';
 
@@ -25,7 +24,6 @@ function ScrollHandler() {
 export default function App() {
   return (
     <div className="min-h-screen bg-bg text-text flex flex-col font-sans selection:bg-accent selection:text-bg">
-      <CustomCursor />
       <ScrollHandler />
       <Navbar />
       <div className="flex-1">

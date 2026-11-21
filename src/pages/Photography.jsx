@@ -4,7 +4,6 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { photos } from '../data/photos';
 import FieldPhoto from '../components/FieldPhoto';
 import Lightbox from '../components/Lightbox';
-import EditableField from '../components/EditableField';
 
 export default function Photography() {
   const [lightboxIndex, setLightboxIndex] = useState(null);
@@ -47,12 +46,9 @@ export default function Photography() {
           >
             Field notes
           </h1>
-          <div className="font-sans text-base md:text-lg text-muted max-w-2xl font-light">
-            <EditableField
-              value="[EDIT: Field notes on light, urban wildlife, and overlooked structures in Nashik.]"
-              as="p"
-            />
-          </div>
+          <p className="font-sans text-base md:text-lg text-muted max-w-2xl font-light">
+            Field notes on light, urban wildlife, and overlooked structures in Nashik.
+          </p>
         </header>
 
         {/* Masonry Layout */}
